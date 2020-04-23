@@ -54,11 +54,11 @@ kubeadm_version: "{{ kube_version }}"
 etcd_version: v3.3.12
 
 # gcr and kubernetes image repo define
-gcr_image_repo: "gcr.io"
+gcr_image_repo: "mirrorgcrio"
 kube_image_repo: "mirrorgcrio"
 
 # docker image repo define
-docker_image_repo: "docker.io"
+docker_image_repo: ""
 
 # quay image repo define
 quay_image_repo: "quay.io"
