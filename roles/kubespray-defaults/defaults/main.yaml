@@ -255,7 +255,7 @@ docker_insecure_registries: []
 # docker_registry_mirrors:
 #   - https://registry.docker-cn.com
 #   - https://mirror.aliyuncs.com
-docker_registry_mirrors: []
+docker_registry_mirrors: ["https://docker.mirrors.ustc.edu.cn"]
 
 ## If non-empty will override default system MounFlags value.
 ## This option takes a mount propagation flag: shared, slave
