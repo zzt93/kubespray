@@ -54,8 +54,9 @@ kubeadm_version: "{{ kube_version }}"
 etcd_version: v3.3.12
 
 # gcr and kubernetes image repo define
-gcr_image_repo: "mirrorgcrio"
-kube_image_repo: "mirrorgcrio"
+gcr_image_repo: "registry.cn-hangzhou.aliyuncs.com/google_containers"
+kube_image_repo: "registry.cn-hangzhou.aliyuncs.com/google_containers"
+kube_image_repo2: "mirrorgcrio"
 
 # docker image repo define
 docker_image_repo: "docker.io"
@@ -518,11 +519,11 @@ coredns_image_repo: "{{ docker_image_repo }}/coredns/coredns"
 coredns_image_tag: "{{ coredns_version }}"
 
 nodelocaldns_version: "1.15.12"
-nodelocaldns_image_repo: "{{ kube_image_repo }}/k8s-dns-node-cache"
+nodelocaldns_image_repo: "{{ kube_image_repo2 }}/k8s-dns-node-cache"
 nodelocaldns_image_tag: "{{ nodelocaldns_version }}"
 
 dnsautoscaler_version: 1.7.1
-dnsautoscaler_image_repo: "{{ kube_image_repo }}/cluster-proportional-autoscaler-{{ image_arch }}"
+dnsautoscaler_image_repo: "{{ kube_image_repo2 }}/cluster-proportional-autoscaler-{{ image_arch }}"
 dnsautoscaler_image_tag: "{{ dnsautoscaler_version }}"
 test_image_repo: "{{ docker_image_repo }}/library/busybox"
 test_image_tag: latest
