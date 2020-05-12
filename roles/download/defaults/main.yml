@@ -1,6 +1,6 @@
 ---
 local_release_dir: /tmp/releases
-download_cache_dir: /tmp/kubespray_cache
+download_cache_dir: /data/kubespray_cache
 
 # do not delete remote cache files after using them
 # NOTE: Setting this parameter to TRUE is only really useful when developing kubespray
