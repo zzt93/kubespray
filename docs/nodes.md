@@ -7,6 +7,9 @@ Modified from [comments in #3471](https://github.com/kubernetes-sigs/kubespray/i
 This should be the easiest.
 
 ### 1) Add new node to the inventory
+```sh
+vi inventory/mycluster/hosts.yaml
+```
 
 ### 2) Run `scale.yml`
 
@@ -14,6 +17,10 @@ You can use `--limit=node1` to limit Kubespray to avoid disturbing other nodes i
 
 Before using `--limit` run playbook `facts.yml` without the limit to refresh facts cache for all nodes.
 
+```sh
+ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root  facts.yml
+ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root --limit=node1,node2 scale.yml
+```
 ### 3) Drain the node that will be removed
 
 ```sh
