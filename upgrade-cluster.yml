@@ -4,6 +4,7 @@
 
 - hosts: all
   gather_facts: false
+  tags: always
   tasks:
     - name: "Set up proxy environment"
       set_fact:
@@ -23,6 +24,7 @@
     - { role: bastion-ssh-config, tags: ["localhost", "bastion"] }
 
 - hosts: k8s-cluster:etcd:calico-rr
+  strategy: linear
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
   gather_facts: false
   vars:
@@ -34,6 +36,7 @@
     - { role: bootstrap-os, tags: bootstrap-os}
 
 - name: Gather facts
+  tags: always
   import_playbook: facts.yml
 
 - name: Download images to ansible host cache via first kube-master node
@@ -108,8 +111,8 @@
     - { role: upgrade/post-upgrade, tags: post-upgrade }
   environment: "{{ proxy_env }}"
 
-- name: Upgrade calico and external cloud provider on all masters and nodes
-  hosts: kube-master:kube-node
+- name: Upgrade calico and external cloud provider on all masters, calico-rrs, and nodes
+  hosts: kube-master:calico-rr:kube-node
   gather_facts: False
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
   serial: "{{ serial | default('20%') }}"
@@ -121,7 +124,7 @@
     - { role: kubernetes-apps/policy_controller, tags: policy-controller }
 
 - name: Finally handle worker upgrades, based on given batch size
-  hosts: kube-node:!kube-master
+  hosts: kube-node:calico-rr:!kube-master
   gather_facts: False
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
   serial: "{{ serial | default('20%') }}"

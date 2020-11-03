@@ -1,12 +1,13 @@
 ---
-crio_kubic_versions:
-  "1.18": "1.17"
-  "1.17": "1.17"
-  "1.16": "1.16"
+default_crio_packages:
+  - "cri-o=1.19.0~0"
+  - "cri-o-runc=1.0.0-6"
 
-crio_packages:
-  - "cri-o-{{ crio_kubic_versions[ kube_version | regex_replace('^v(?P<major>\\d+).(?P<minor>\\d+).(?P<patch>\\d+)$', '\\g<major>.\\g<minor>') ] | default('1.17') }}"
+crio_packages: "{{ ubuntu_crio_packages | default(default_crio_packages) }}"
 
-crio_conmon: /usr/bin/conmon
-crio_seccomp_profile: ""
-crio_runc_path: /usr/lib/cri-o-runc/sbin/runc
+# The crio_runtimes variable defines a list of OCI compatible runtimes.
+crio_runtimes:
+  - name: runc
+    path: /usr/sbin/runc
+    type: oci
+    root: /run/runc

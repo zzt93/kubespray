@@ -138,6 +138,7 @@ The following tags are defined in playbooks:
 |                   upload | Distributing images/binaries across hosts
 |                    weave | Network plugin Weave
 |              ingress_alb | AWS ALB Ingress Controller
+|              ambassador  | Ambassador Ingress Controller
 
 Note: Use the ``bash scripts/gen_tags.sh`` command to generate a list of all
 tags found in the codebase. New tags will be listed with the empty "Used for"
@@ -183,3 +184,7 @@ bastion ansible_host=x.x.x.x
 
 For more information about Ansible and bastion hosts, read
 [Running Ansible Through an SSH Bastion Host](https://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/)
+
+## Mitogen
+
+You can use [mitogen](mitogen.md) to speed up kubespray.

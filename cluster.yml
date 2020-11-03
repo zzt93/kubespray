@@ -4,6 +4,7 @@
 
 - hosts: all
   gather_facts: false
+  tags: always
   tasks:
     - name: "Set up proxy environment"
       set_fact:
@@ -23,6 +24,7 @@
     - { role: bastion-ssh-config, tags: ["localhost", "bastion"] }
 
 - hosts: k8s-cluster:etcd
+  strategy: linear
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
   gather_facts: false
   roles:
@@ -30,6 +32,7 @@
     - { role: bootstrap-os, tags: bootstrap-os}
 
 - name: Gather facts
+  tags: always
   import_playbook: facts.yml
 
 - hosts: k8s-cluster:etcd
